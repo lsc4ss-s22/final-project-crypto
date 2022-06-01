@@ -1,4 +1,4 @@
-# __The evolution of spillovers between cryptocurrencies and conventional currencies: the complexity and dynamism of cross-market interaction__
+# __The Evolution of Spillovers Between Cryptocurrencies and Conventional Currencies: The Complexity and Dynamism of Cross-Market Interaction__
 
 This is the GitHub repository for the final project of MACS 30123 Large Scale Computing.
 
@@ -10,7 +10,7 @@ pip install -r requirements.txt
 ```
 
 ## Project Description
-The current project aims at exploring the spillovers between cryptocurrencies and conventional currencies. We pooled historical historical data from XX mainstream conventional currencies and cryptocurrencies from XX to XX, and employed a compute-intensive framework incorporating both econometric measures and up-to-date neural architectures for data analysis. Raw data are available both in the `Raw data` folder in this github repository and in a S3 bucket (https://crypto-conven-training.s3.us-west-2.amazonaws.com). 
+The current project aims at exploring the spillovers between cryptocurrencies and conventional currencies. We pooled historical historical data from XX mainstream conventional currencies and cryptocurrencies from XX to XX, and employed a compute-intensive framework incorporating both econometric measures and up-to-date neural architectures for data analysis. Raw data are available both in the `Raw data` folder in this github repository and in a S3 bucket (https://crypto-conven-training.s3.us-west-2.amazonaws.com). To speed up calculations, we utilized large-scale parallel processing including MPI, PySpark, and GPU computing.
 
 ## Data Processing and Analysis
 ### Spark-based Data Preprocessing Pipeline
