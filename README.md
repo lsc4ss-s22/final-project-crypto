@@ -53,6 +53,8 @@ Model Evaluation: <a href="https://github.com/lsc4ss-s22/final-project-crypto/bl
 ### 7. Visualization
 ![plot](https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Images/lm_results.svg)
 
+## License
+
 ## __To-do List__
 - [x] Spark-based Data Preprocessing Pipeline
 - [x] Paralleled Economic Spillovers Computation with R
