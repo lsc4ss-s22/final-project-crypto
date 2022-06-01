@@ -28,7 +28,7 @@ The current project aims at exploring the spillovers between cryptocurrencies an
 
 **Codes availabe at:** <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/R%20Scripts/parallel.R"> parallel.R</a>
 
-**Visualizaton (network graph reflecting connectedness and spillovers):** 
+**Visualizaton (network graph reflecting connectedness and spillovers)** 
 
 **Speedup (Rmpi Package for R):**\
 Online documentation: https://cran.r-project.org/web/packages/Rmpi/index.html \
