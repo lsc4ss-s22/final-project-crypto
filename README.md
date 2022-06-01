@@ -14,7 +14,22 @@ The current project aims at exploring the spillovers between cryptocurrencies an
 
 ## Data Processing and Analysis
 ### Spark-based Data Preprocessing Pipeline
+> Read currency data and calculate returns and volatility of currencies.
 
+**Codes available at:** https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Python%20scripts/data%20preprocessing.py
+
+**Speedup (PySpark 2.4):** https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Notebooks/pyspark_graphframe.ipynb
+
+## Paralleled Economic Spillovers Computation with R
+> Calculate spillovers
+
+**Codes availabe at:** https://github.com/lsc4ss-s22/final-project-crypto/blob/main/R%20Scripts/parallel.R
+
+**Speedup (Rmpi Package for R):**\
+Online documentation: https://cran.r-project.org/web/packages/Rmpi/index.html \
+Rmpi installation for Mac OS X: http://fisher.stats.uwo.ca/faculty/yu/Rmpi/mac_os_x.htm \
+Rmpi installation for Windows: http://fisher.stats.uwo.ca/faculty/yu/Rmpi/windows.htm \
+Rmpi installation for Linux: http://fisher.stats.uwo.ca/faculty/yu/Rmpi/install.htm
 
 ## __To-do List__
 - [x] Spark-based Data Preprocessing Pipeline
