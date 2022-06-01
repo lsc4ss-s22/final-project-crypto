@@ -9,6 +9,13 @@ The codes were written in Python 3.9.7 and RStudio, and all of its dependencies 
 pip install -r requirements.txt
 ```
 
+## Project Description
+The current project aims at exploring the spillovers between cryptocurrencies and conventional currencies. We pooled historical historical data from XX mainstream conventional currencies and cryptocurrencies from XX to XX, and employed a compute-intensive framework incorporating both econometric measures and up-to-date neural architectures for data analysis. Raw data are available both in the `Raw data` folder in this github repository and in a S3 bucket (https://crypto-conven-training.s3.us-west-2.amazonaws.com). 
+
+## Data Processing and Analysis
+### Spark-based Data Preprocessing Pipeline
+
+
 ## __To-do List__
 - [x] Spark-based Data Preprocessing Pipeline
 - [x] Paralleled Economic Spillovers Computation with R
