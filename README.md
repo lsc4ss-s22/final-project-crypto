@@ -2,7 +2,12 @@
 
 This is the GitHub repository for the final project of MACS 30123 Large Scale Computing.
 
-__Author:__ Shiyang Lai, 
+__Author:__ Shiyang Lai, Peihan Gao, Juno Wu, Coco Yu
+
+The codes were written in Python 3.9.7 and RStudio, and all of its dependencies can be installed by running the following in the terminal (with the `requirements.txt` file included in this repository):
+```
+pip install -r requirements.txt
+```
 
 ## __To-do List__
 - [x] Spark-based Data Preprocessing Pipeline
