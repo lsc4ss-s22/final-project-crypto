@@ -16,14 +16,14 @@ The current project aims at exploring the spillovers between cryptocurrencies an
 ### 1. Spark-based Data Preprocessing Pipeline
 > Read currency data and calculate returns and volatility of currencies.
 
-**Codes available at:** https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Python%20scripts/data%20preprocessing.py
+**Codes available at:** <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Python%20scripts/data%20preprocessing.py">data preprocessing.py</a>
 
-**Speedup (PySpark 2.4):** https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Notebooks/pyspark_graphframe.ipynb
+**Speedup (PySpark 2.4)??????:** <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Notebooks/pyspark_graphframe.ipynb"> pyspark_graphframe.ipynb</a>
 
 ### 2. Paralleled Economic Spillovers Computation with R
 > Calculate spillovers and output network graph
 
-**Codes availabe at:** https://github.com/lsc4ss-s22/final-project-crypto/blob/main/R%20Scripts/parallel.R
+**Codes availabe at:** <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/R%20Scripts/parallel.R"> parallel.R</a>
 
 **Visualizaton (network graph reflecting connectedness and spillovers):** 
 
@@ -36,9 +36,22 @@ Rmpi installation for Linux: http://fisher.stats.uwo.ca/faculty/yu/Rmpi/install.
 ### 3. Data Storage with S3 and Dynamo DB
 > Output files in the previous two steps were uploaded to S3 bucket `crypto-conven-training (us-west-2)` and Dynamo DB `table=return_prediction`
 
-**Codes available at:** https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Notebooks/to_dynamodb.ipynb
+**Codes available at:** <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Notebooks/to_dynamodb.ipynb"> to_dynamodb.ipynb</a>
 
 ### 4. Deep Learning Model Training using AWS EC2 Instances and Midway GPU Nodes
+**Helper packages available at:**\
+<a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Python%20scripts/utils.py">`utils.py`</a> \
+Model Training: Scikit-learn <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Python%20scripts/sklearn_training.py">`sklearn_training.py`</a>; PyTorch <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Python%20scripts/torch_training.py">`torch_training.py`</a> \
+Model Evaluation: <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Python%20scripts/evaluation.py"> `evaluation.py`</a>
+
+### 5. Scalabel Hyperparameter Tuning with _Ray_
+**Codes available at:** 
+
+### 6. Spillovers Network Analysis with Pyspark Graphframe
+**Codes available at:** https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Notebooks/pyspark_graphframe.ipynb
+
+### 7. Visualization
+![plot](https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Images/lm_results.svg)
 
 ## __To-do List__
 - [x] Spark-based Data Preprocessing Pipeline
