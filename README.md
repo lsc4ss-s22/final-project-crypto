@@ -19,7 +19,9 @@ As the cryptocurrency market becomes more developed and popular, more informatio
 ### 1. Spark-based Data Preprocessing Pipeline
 > Read currency data and calculate returns and volatility of currencies.
 
-**Codes available at:** <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Python%20scripts/data%20preprocessing.py">data preprocessing.py</a>
+**Original codes available at:** <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Python%20scripts/data%20preprocessing.py">data preprocessing.py</a>
+
+**Paralleled codes available at:** <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Python%20scripts/preprocessing.py">preprocessing.py</a>
 
 <!-- **Speedup (PySpark 2.4)??????:** <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Notebooks/pyspark_graphframe.ipynb"> pyspark_graphframe.ipynb</a> -->
 
