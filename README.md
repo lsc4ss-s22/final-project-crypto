@@ -29,6 +29,7 @@ The current project aims at exploring the spillovers between cryptocurrencies an
 **Codes availabe at:** <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/R%20Scripts/parallel.R"> parallel.R</a>
 
 Spillover networks under short-, medium-, and long-frequency bands
+
 <img src="Images/short-frequency.png" width="300"/>
 <img src="Images/medium-frequency.png" width="300"/>
 <img src="Images/long-frequency.png" width="300"/>
