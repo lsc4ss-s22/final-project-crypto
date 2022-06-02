@@ -30,7 +30,7 @@ The current project aims at exploring the spillovers between cryptocurrencies an
 
 Spillover networks under short-, medium-, and long-frequency bands
 
-<img src="Images/short-frequency.png" width="330"/><img src="Images/medium-frequency.png" width="330"/><img src="Images/long-frequency.png" width="330"/>
+<img src="Images/short-frequency.png" width="320"/><img src="Images/medium-frequency.png" width="320"/><img src="Images/long-frequency.png" width="320"/>
 
 
 **Speedup (Rmpi Package for R):**\
