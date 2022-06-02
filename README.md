@@ -90,7 +90,7 @@ Snapshot of the tuning result of BiLSTMs
 ![plot](https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Images/lm_results.svg)
 
 ## Contributions
-Data gathering and preprocessing – Shiyang Lai
+Data gathering and preprocessing – Shiyang Lai & Peihan Gao
 
 VARX-L model-based currency spillovers calculation – Juno Wu & Coco Yu
 
