@@ -25,7 +25,7 @@ As the cryptocurrency market becomes more developed and popular, more informatio
 
 ### 2. Paralleled Economic Spillovers Computation with R
 > Do VAR lag fitting, calculate spillovers, and output network graph.
-> After the implementation of Rmpi(parallel processing locally with work distributed to 3 cores, the running time is down to xx, in comparison to several >hours when serial processing. 
+> After the implementation of Rmpi(parallel processing locally with work distributed to 3 cores, the running time is down to xx, in comparison to several hours when serial processing. 
 
 **Codes availabe at:** <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/R%20Scripts/parallel.R"> parallel.R</a>
 
