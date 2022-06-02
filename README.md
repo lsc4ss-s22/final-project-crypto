@@ -90,10 +90,15 @@ Snapshot of the tuning result of BiLSTMs
 
 ## Contributions
 Data gathering and preprocessing – Shiyang Lai
+
 VARX-L model-based currency spillovers calculation – Juno Wu & Coco Yu
+
 Prediction models training, running and evaluation – Shiyang Lai & Peihan Gao
+
 README file – Juno Wu & Coco Yu
+
 Presentation visualization – Juno Wu & Coco Yu
+
 Presentation recording – Shiyang Lai, Peihan Gao, Coco Yu, Juno Wu
 
 ## License
