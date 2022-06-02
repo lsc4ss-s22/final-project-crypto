@@ -10,7 +10,7 @@ $ pip install -r requirements.txt
 ```
 
 ## Project Description
-The current project aims at exploring the spillovers between cryptocurrencies and conventional currencies. We pooled historical historical data from 155 mainstream conventional currencies and cryptocurrencies from Sep 1 2015 to May 1 2022, and employed a compute-intensive framework incorporating both econometric measures and up-to-date neural architectures for data analysis. Raw data are available both in the `Raw data` folder in this github repository (https://github.com/lsc4ss-s22/final-project-crypto/tree/main/Raw%20data) and in a S3 bucket (https://crypto-conven-training.s3.us-west-2.amazonaws.com). To speed up calculations, we utilized large-scale parallel processing including MPI, PySpark, and GPU computing.
+The current project aims at exploring the spillovers between cryptocurrencies and conventional currencies. We pooled historical data from 155 mainstream conventional currencies and cryptocurrencies from Sep 1 2015 to May 1 2022, and employed a compute-intensive framework incorporating both econometric measures and up-to-date neural architectures for data analysis. Raw data are available both in the `Raw data` folder in this github repository (https://github.com/lsc4ss-s22/final-project-crypto/tree/main/Raw%20data) and in a S3 bucket (https://crypto-conven-training.s3.us-west-2.amazonaws.com). To speed up calculations, we utilized large-scale parallel processing including MPI, PySpark, and GPU computing.
 
 ![image](https://user-images.githubusercontent.com/91500767/171509247-9f34c236-a909-4135-9a3b-3bdde478e16b.png)
 
@@ -95,7 +95,7 @@ VARX-L model-based currency spillovers calculation – Juno Wu & Coco Yu
 
 Prediction models training, running and evaluation – Shiyang Lai & Peihan Gao
 
-README file – Juno Wu & Coco Yu
+README file creation – Juno Wu & Coco Yu
 
 Presentation visualization – Juno Wu & Coco Yu
 
