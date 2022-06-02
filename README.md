@@ -88,6 +88,14 @@ Snapshot of the tuning result of BiLSTMs
 
 ![plot](https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Images/lm_results.svg)
 
+## Contributions
+Data gathering and preprocessing – Shiyang Lai
+VARX-L model-based currency spillovers calculation – Juno Wu & Coco Yu
+Prediction models training, running and evaluation – Shiyang Lai & Peihan Gao
+README file – Juno Wu & Coco Yu
+Presentation visualization – Juno Wu & Coco Yu
+Presentation recording – Shiyang Lai, Peihan Gao, Coco Yu, Juno Wu
+
 ## License
 Copyright (c) 2022 lsc4ss-s22-group-project
 
@@ -108,12 +116,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-## __To-do List__
-- [x] Spark-based Data Preprocessing Pipeline
-- [x] Paralleled Economic Spillovers Computation with R
-- [x] Data Storage with S3 and DynamoDB
-- [x] Deep Learning Model Training using AWS EC2 Instances and Midway GPU Nodes 
-- [x] Scalable Hyperparameter Tuning with _Ray_
-- [x] Spillovers Network Analysis with Pyspark Graphframe
-- [x] Visualization
