@@ -104,7 +104,7 @@ Presentation visualization – Juno Wu & Coco Yu
 
 Presentation recording – Shiyang Lai, Peihan Gao, Coco Yu, Juno Wu
 
-## License
+## <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/license">**License** </a>
 Copyright (c) 2022 lsc4ss-s22-group-project
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
