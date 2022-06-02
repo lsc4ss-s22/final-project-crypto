@@ -31,7 +31,7 @@ As the cryptocurrency market becomes more developed and popular, more informatio
 
 Spillover networks under short-, medium-, and long-frequency bands
 
-<img src="Images/short-frequency.png" width="280"/><img src="Images/medium-frequency.png" width="280"/><img src="Images/long-frequency.png" width="280"/>
+<img src="Images/short-frequency.png" width="240"/><img src="Images/medium-frequency.png" width="240"/><img src="Images/long-frequency.png" width="240"/>
 
 
 **Speedup (Rmpi Package for R):**\
