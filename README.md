@@ -85,6 +85,7 @@ Snapshot of the tuning result of BiLSTMs
 > Plot predictability comparison (with cross-market information and without) for the six models
 
 **Codes available at:** <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Notebooks/visualization.ipynb">visualization.ipynb</a>
+
 ![plot](https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Images/lm_results.svg)
 
 ## License
