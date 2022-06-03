@@ -21,6 +21,7 @@ This diagram describes the workflow of this project. Various large-scale computi
 ## Data Processing and Analysis
 ### 1. Spark-based Data Preprocessing Pipeline
 > Read currency data and calculate returns and volatility of currencies.
+> After the implementation of Pyspark(parallel processing locally with work distributed to 4 instances, the running time is down to 11.7 mins, in comparison to hours when serial processing. 
 
 **Original codes available at:** <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Python%20scripts/data%20preprocessing.py">data preprocessing.py</a>
 
@@ -30,7 +31,7 @@ This diagram describes the workflow of this project. Various large-scale computi
 
 ### 2. Paralleled Economic Spillovers Computation with R
 > Do VAR lag fitting, calculate spillovers, and output network graph.
-> After the implementation of Rmpi(parallel processing locally with work distributed to 3 cores, the running time is down to 11.7 mins, in comparison to hours when serial processing. 
+> After the implementation of Rmpi(parallel processing locally with work distributed to 3 cores, the running time is down to 2 mins, in comparison to ten minutes when serial processing. 
 
 **Codes availabe at:** <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/R%20Scripts/parallel.R"> parallel.R</a>
 

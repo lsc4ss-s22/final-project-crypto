@@ -1,17 +1,16 @@
 """
-Author: Shiyang Lai, Peihan Gao
+Author: Shiyang Lai (original code), Peihan Gao (parallel with pyspark)
 E-mail: shiyanglai@uchicago.edu
 Purpose: Organizing and formalizing data set and parallelizing for analysis usage
 """
-import numpy as np
 import pandas as pd
-from pyspark.sql.functions import col, unix_timestamp, to_date
 from pyspark.sql.types import DateType
 from pyspark.sql import Window
-from pyspark.sql.functions import coalesce, last, first
+import pyspark.sql.functions as f
 import boto3
-import io
-from io import StringIO 
+from pyspark.sql.functions import col, unix_timestamp, to_date, when, monotonically_increasing_id, coalesce, last, first
+from io import StringIO  
+
 
 class DataPipline():
     
@@ -63,49 +62,43 @@ class DataPipline():
         return dataset, set_name
     
     def calculate_returns(self, dataset, _by='Close', how='mixed'):
-        pandasDF = dataset.toPandas()
-        returns = pd.Series(index=[pandasDF.Date.values[1:]])
+        dataset=dataset.withColumn("index", monotonically_increasing_id())
+        dataset=dataset.withColumn('lg'+_by, f.log('Close'))
+        w = Window.orderBy('index')
+        returns = dataset.withColumn('lead', f.lag('lg'+_by, 1).over(w)) \
+        .withColumn('returns', f.when(f.col('lead').isNotNull(), f.col('lg'+_by) - f.col('lead')).otherwise(f.lit(None))) \
+        .where(col('index')!=0)[['Date','returns']]
 
-        for index, row in pandasDF.iterrows():
-            if index != 0:
-                today = pandasDF.loc[index, _by]
-                yesterday = pandasDF.loc[index-1, _by]
-                returns.loc[row['Date']] = np.log(today) - np.log(yesterday)
-                
         if how == 'mixed':
             return returns 
         elif how == 'positive':
-            return pd.Series(data=[a if a > 0 else 0 for a in returns],
-                            index=[pandasDF.Date.values[1:]])
+            conditions = when(col("returns") > 0, col("returns"))\
+                .otherwise(0)
+            returns = returns .withColumn("returns", conditions)
+            return returns
         elif how == 'negative':
-            return pd.Series(data=[a if a < 0 else 0 for a in returns],
-                            index=[pandasDF.Date.values[1:]])
+            conditions = when(col("returns") < 0, col("returns"))\
+                .otherwise(0)
+            returns = returns .withColumn("returns", conditions)
+            return returns
         else:
             raise ValueError
-    
-    def calculate_volatility(self, dataset):
-        pandasDF = dataset.toPandas()
-        volatility = pd.Series(index=pandasDF.Date.values)
-        for _, row in pandasDF.iterrows():
-            h = np.log(row['High'])
-            l = np.log(row['Low'])
-            c = np.log(row['Close'])
-            o = np.log(row['Open'])
-            v = 0.511*(h-l)**2 - 0.019*((c-o)*(h+l-2*o)-2*(h-o)*(l-o)) - 0.383*(c-o)**2
-            volatility.loc[row['Date']] = v
+        
+    def calculate_volatility(self, data):
+        h = f.log('High')
+        l = f.log('Low')
+        c = f.log('Close')
+        o = f.log('Open')
+        v = 0.511*(h-l)**2 - 0.019*((c-o)*(h+l-2*o)-2*(h-o)*(l-o)) - 0.383*(c-o)**2
+        dataset = data.withColumn('volatility', v)
+        volatility = dataset[['Date','volatility']]
         return volatility
+
+    def calculate_exchange(self, dataset, _by='Close'):
+        exchange = dataset[['Date',_by]]
+        return exchange
     
-    def process(self, crypto, spark): 
-        conv_returns = []
-        conv_preturns = []
-        conv_nreturns = []
-        conv_volatility = []
-        conv_exchange = []
-        crypto_returns = []
-        crypto_preturns = []
-        crypto_nreturns = []
-        crypto_volatility = []
-        crypto_exchange = []
+    def preprocess(self, crypto, spark): 
         origional_keys = list(crypto.keys()).copy()
         for set_name in origional_keys:
             crypto[set_name] = self.fill_dataset(crypto[set_name], spark, self.start_date, self.end_date, _type="crpyto")
@@ -122,56 +115,73 @@ class DataPipline():
             if set_name != new_set_name:
                 del conven[set_name]
                 conven[new_set_name] = dataset
+        return crypto, conven
+
+    def init_calculate(self,conven,crypto,key_nm,how='mixed',_type='conventional', calculate='returns'):
+        if calculate == 'returns':
+            if _type=='conventional':
+                return self.calculate_returns(conven[key_nm], _by=self._by, how=how).\
+                    withColumnRenamed("returns", key_nm)
+            else:
+                return self.calculate_returns(crypto[key_nm], _by=self._by, how=how).\
+                    withColumnRenamed("returns", key_nm)
+        elif calculate == 'volatility':
+            if _type=='conventional':
+                return self.calculate_volatility(conven[key_nm]).withColumnRenamed("volatility", key_nm)
+            else:
+                return self.calculate_volatility(crypto[key_nm]).withColumnRenamed("volatility", key_nm)
+        else:
+            if _type=='conventional':
+                return self.calculate_exchange(conven[key_nm],_by=self._by).withColumnRenamed(self._by, key_nm)
+            else:
+                return self.calculate_exchange(crypto[key_nm],_by=self._by).withColumnRenamed(self._by, key_nm)
+    
+    def get_calculate(self, conven,crypto, how='mixed', _type='conventional', calculate='returns'):
+        conven_keys = [k for k in conven.keys()]
+        crypto_keys = [k for k in crypto.keys()]
+        if _type == 'conventional':
+            calculate_df = self.init_calculate(conven=conven,crypto=crypto,key_nm=conven_keys[0],how=how, _type=_type)
+            for name in conven_keys[1:]:
+                calculate_df = calculate_df.join( \
+                    self.init_calculate(conven=conven,crypto=crypto,key_nm=name,how=how, _type=_type,calculate=calculate), on = 'Date')
+        else:
+            calculate_df = self.init_calculate(conven=conven,crypto=crypto,key_nm=crypto_keys[0],how=how, _type=_type)
+            for name in crypto_keys[1:]:
+                calculate_df = calculate_df.join( \
+                    self.init_calculate(conven=conven,crypto=crypto,key_nm=name,how=how, _type=_type,calculate=calculate), on = 'Date')              
+        return calculate_df    
         
-        for name in conven.keys():
-            conv_returns.append(self.calculate_returns(conven[name], _by=self._by, how='mixed'))
-            conv_preturns.append(self.calculate_returns(conven[name], _by=self._by, how='positive'))
-            conv_nreturns.append(self.calculate_returns(conven[name], _by=self._by, how='negative'))
-            conv_volatility.append(self.calculate_volatility(conven[name]))
-            conv_exchange.append(conven[name].toPandas()[self._by])
-        for name in crypto.keys():
-            crypto_returns.append(self.calculate_returns(crypto[name], _by=self._by, how='mixed'))
-            crypto_preturns.append(self.calculate_returns(crypto[name], _by=self._by, how='positive'))
-            crypto_nreturns.append(self.calculate_returns(crypto[name], _by=self._by, how='negative'))
-            crypto_volatility.append(self.calculate_volatility(crypto[name]))
-            crypto_exchange.append(crypto[name].toPandas()[self._by])
-            
-        conv_l=[conv_returns, conv_preturns, conv_nreturns, conv_volatility, conv_exchange]
-        cryp_l=[crypto_returns,crypto_preturns,crypto_nreturns,crypto_volatility,crypto_exchange] 
+    def upload_s3(self,conven,crypto):
+        types= ['conventional', 'crypto' ]
+        hows = ['mixed','positive','negative']
+        calculates =['returns', 'volatility', 'exchange']
         
-        df_conv_l = []
-        df_cryp_l = []
-        agg_l = []
-
-        for con in conv_l:
-            conv = pd.concat(con, axis=1)
-            conv.columns = conven.keys() 
-            df_conv_l.append(conv)
-
-        for cry in cryp_l:
-            cryp = pd.concat(cry, axis=1)
-            cryp.columns = crypto.keys()          
-            df_cryp_l.append(cryp)           
-        
-        for i in range(5):
-            df= pd.merge(df_conv_l[i], df_cryp_l[i], how='inner', left_index=True, right_index=True)
-            agg_l.append(df)
-
-
-        return df_conv_l + df_cryp_l + agg_l
-
-    def upload_s3(self, df_lst):
         s3_resource = boto3.resource('s3')
         bucket = 'crpytoconven' 
         csv_buffer = StringIO()
         
-        for c_df in df_lst:
-            c_df.to_csv(csv_buffer)
-            name =[x for x in globals() if globals()[x] is c_df][0]
-            s3_resource.Object(bucket, 'project/data/preprocessed/'+name+'.csv').put(Body=csv_buffer.getvalue())
+        df_dct = {}
+        for calculate in calculates:
+            for _type in types:
+                if calculate == 'returns':
+                    for how in hows:
+                        df_dct[_type+calculate+how] = self.get_calculate(conven,crypto, how=how, _type=_type, calculate=calculate)
+                else:
+                    df_dct[_type+calculate] = self.get_calculate(conven,crypto, _type=_type, calculate=calculate)
+                    
+        for calculate in calculates:
+            if calculate == 'returns':
+                for how in hows:  
+                    df_dct[calculate+how] = df_dct[types[0]+calculate+how].join(df_dct[types[1]+calculate+how],on='Date', how="inner")
+            else:
+                df_dct[calculate] = df_dct[types[0]+calculate].join(df_dct[types[1]+calculate],on='Date', how="inner")
+                
+
+        for key, df in df_dct.items():
+            df.write.parquet('s3://crpytoconven/project/data/preprocessed/'+key+'.parquet',mode="overwrite")
                                 
     def activate(self,crypto, spark):
-        df_lst = self.process(crypto, spark)
-        self.upload_s3(df_lst)
+        crypto, conven = self.preprocess(crypto, spark)
+        self.upload_s3(conven,crypto)
 
         print('SUCCESS!')
