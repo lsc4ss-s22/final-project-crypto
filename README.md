@@ -30,7 +30,7 @@ This diagram describes the workflow of this project. Various large-scale computi
   --      time elapsed     --               
     - parallel version 2 mins                       
     - serial version 10 mins               
-  6. Write each dataframe in the dictionary as parquet into S3 bucket. (15 parquets ~ 90mins)         
+  6. Write each dataframe in the dictionary as parquet into S3 bucket. (15 parquets ~ 60mins)         
      
 > The parallelization is conducted with pyspark on EMR notebook.                  
                              
