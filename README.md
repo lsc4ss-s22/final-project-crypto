@@ -45,7 +45,7 @@ This diagram describes the workflow of this project. Various large-scale computi
 
 ### 2. Paralleled Economic Spillovers Computation with R
 > Do VAR lag fitting, calculate spillovers, and output network graph.
-> After the implementation of Rmpi(parallel processing locally with work distributed to 3 cores, the running time is down to 2 mins, in comparison to ten minutes when serial processing. 
+> After the implementation of Rmpi(parallel processing locally with work distributed to 3 cores, the running time is down to 20 minutes, in comparison to 40 minutes when serial processing. 
 
 **Codes availabe at:** <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/R%20Scripts/parallel.R"> parallel.R</a>
 
