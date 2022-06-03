@@ -151,14 +151,12 @@ class DataPipline():
                     self.init_calculate(conven=conven,crypto=crypto,key_nm=name,how=how, _type=_type,calculate=calculate), on = 'Date')              
         return calculate_df    
         
-    def upload_s3(self,conven,crypto):
+    def activate(self,crypto, spark):
+        crypto, conven = self.preprocess(crypto, spark)
+
         types= ['conventional', 'crypto' ]
         hows = ['mixed','positive','negative']
         calculates =['returns', 'volatility', 'exchange']
-        
-        s3_resource = boto3.resource('s3')
-        bucket = 'crpytoconven' 
-        csv_buffer = StringIO()
         
         df_dct = {}
         for calculate in calculates:
@@ -175,12 +173,13 @@ class DataPipline():
                     df_dct[calculate+how] = df_dct[types[0]+calculate+how].join(df_dct[types[1]+calculate+how],on='Date', how="inner")
             else:
                 df_dct[calculate] = df_dct[types[0]+calculate].join(df_dct[types[1]+calculate],on='Date', how="inner")      
+        
+        print('Processing complete!')
+        return df_dct
 
+    def upload_s3(self,crypto, spark):
+        df_dct = self.activate(crypto, spark)
+        print('Begin uploading data to s3')
+        
         for key, df in df_dct.items():
             df.write.parquet('s3://crpytoconven/project/data/preprocessed/'+key+'.parquet',mode="overwrite")
-                                
-    def activate(self,crypto, spark):
-        crypto, conven = self.preprocess(crypto, spark)
-        self.upload_s3(conven,crypto)
-
-        print('SUCCESS!')
