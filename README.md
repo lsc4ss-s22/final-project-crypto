@@ -125,6 +125,9 @@ The exponential growth of Bitcoin and altcoins and the dramatic fluctuation of t
 
 ![plot](https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Images/lm_results.svg)
 
+### 8. Limitations
+The first limitation of this study is that we were unable to find an approach to run our R code on AWS or midway parallelly, which restricts our scalability from the hardware end. If we were able to use more cores than 3, we believe that the process of calculating spillovers and generating graphs will be even faster than 20 minutes. In addition, the time it takes for writing data frames into S3 bucket by Pyspark parquet is a bit long (~60mins). In the future, we might need to find new approaches to speed up this process. Also, our study is limited by the available resources from AWS EC2 instances. This limited availability inevitably leads to the failing of our parallelization on AWS with the 4-hour limit running time. Finally, we were not able to finish a more complete visualization of our findings due to the time limit.
+
 ## Contributions
 Data gathering and preprocessing – Shiyang Lai & Peihan Gao
 
