@@ -25,7 +25,9 @@ This diagram describes the workflow of this project. Various large-scale computi
 
 **Original codes available at:** <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Python%20scripts/data%20preprocessing.py">data preprocessing.py</a>
 
-**Paralleled codes available at:** <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Python%20scripts/preprocessing.py">preprocessing.py</a>
+**Paralleled codes available at:**                          
+1. Script: <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Python%20scripts/preprocessing.py">preprocessing.py</a>                      
+2. notebook:  <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Notebooks/preprocess.ipynb">preprocess.ipynb</a>              
 
 <!-- **Speedup (PySpark 2.4)??????:** <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Notebooks/pyspark_graphframe.ipynb"> pyspark_graphframe.ipynb</a> -->
 
