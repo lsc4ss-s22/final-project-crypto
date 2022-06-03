@@ -177,9 +177,8 @@ class DataPipline():
         print('Processing complete!')
         return df_dct
 
-    def upload_s3(self,crypto, spark):
-        df_dct = self.activate(crypto, spark)
+    def upload_s3(self,df_dct):
         print('Begin uploading data to s3')
-        
+
         for key, df in df_dct.items():
             df.write.parquet('s3://crpytoconven/project/data/preprocessed/'+key+'.parquet',mode="overwrite")

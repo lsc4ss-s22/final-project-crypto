@@ -20,12 +20,24 @@ This diagram describes the workflow of this project. Various large-scale computi
 
 ## Data Processing and Analysis
 ### 1. Spark-based Data Preprocessing Pipeline
-> Read currency data and calculate returns and volatility of currencies.
-> After the implementation of Pyspark(parallel processing locally with work distributed to 4 instances, the running time is down to 11.7 mins, in comparison to hours when serial processing. 
+> Data processing contains:        
+  0. Upload the folder of raw csv files into S3 bucket        
+  1. Read currencies raw data from S3 bucket    
+  2. Fill nulls  with interpolate (exchange) and forward/backward filling (symbol)     
+  3. Unify the unit (unify the format of currency symbols and corresponding exchanges)      
+  4. Calculate the returns, volatility, exchange rate of currencies   
+  5. Generate a dictonary of pyspark dataframe            
+  --      time elapsed     --   
+    - parallel version 2 mins             
+    - serial version 10 mins               
+  6. Write each dataframe in the dictionary as parquet into S3 bucket. (~ 15mins)         
+     
+> The parallelization is conducted with pyspark on EMR notebook.                  
+                             
 
 **Original codes available at:** <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Python%20scripts/data%20preprocessing.py">data preprocessing.py</a>
 
-**Paralleled codes available at:**                          
+**Paralleled codes with pyspark available at:**                                    
 1. Script: <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Python%20scripts/preprocessing.py">preprocessing.py</a>                      
 2. notebook:  <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Notebooks/preprocess.ipynb">preprocess.ipynb</a>              
 
