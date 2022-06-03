@@ -170,9 +170,21 @@ class DataPipline():
         for calculate in calculates:
             if calculate == 'returns':
                 for how in hows:  
-                    df_dct[calculate+how] = df_dct[types[0]+calculate+how].join(df_dct[types[1]+calculate+how],on='Date', how="inner")
+                    conv=df_dct[types[0]+calculate+how]
+                    cryp=df_dct[types[1]+calculate+how]
+                    cols= set(conv.columns) &set(cryp.columns) - set(['Date'])
+                    col_use=[c for c in conv.columns if c not in cols]
+                    if cols:
+                        conv=conv[col_use]
+                    df_dct[calculate+how] = conv.join(cryp,on='Date', how="inner")
             else:
-                df_dct[calculate] = df_dct[types[0]+calculate].join(df_dct[types[1]+calculate],on='Date', how="inner")      
+                conv=df_dct[types[0]+calculate]
+                cryp=df_dct[types[1]+calculate]
+                cols= set(conv.columns) &set(cryp.columns) - set(['Date'])
+                col_use=[c for c in conv.columns if c not in cols]
+                if cols:
+                    conv=conv[col_use]
+                df_dct[calculate] = conv.join(cryp,on='Date', how="inner")      
         
         print('Processing complete!')
         return df_dct
