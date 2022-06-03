@@ -61,11 +61,16 @@ Rmpi installation for Windows: http://fisher.stats.uwo.ca/faculty/yu/Rmpi/window
 Rmpi installation for Linux: http://fisher.stats.uwo.ca/faculty/yu/Rmpi/install.htm
 
 ### 3. Data Storage with S3 and Dynamo DB
-> Raw currency data files, processing module script and the processed data files are saved in S3 bucket `crpytoconven (us-east-1)      `                                               
-Image below is the snapshot of the raw data, processed data and the module script in the S3 Bucket. To benefit cross-platform communication, we uploaded all the script module and data into the bucket.                        
-![image](/Snapshots/AWS_S3_RAW.png)            
-![image](/Snapshots/AWS_S3_dataprocess_module.png)             
-![image](/Snapshots/AWS_S3_processed.png)               
+> Raw currency data files, processing module script and the processed data files are saved in S3 bucket `crpytoconven (us-east-1)      `      
+                     
+To benefit cross-platform communication, we uploaded all the script module and data into the bucket.             
+
+Image below is the snapshot of the raw data in the S3 Bucket.                             
+![image](/Snapshots/AWS_S3_RAW.png)      
+Image below is the snapshot of the parallel module script in the S3 Bucket.              
+![image](/Snapshots/AWS_S3_dataprocess_module.png)       
+Image below is the snapshot of the processed data in the S3   Bucket.            
+![image](/Snapshots/AWS_S3_processed.png)                 
                                   
                    
 > Output files in the previous two steps were uploaded to S3 bucket `crypto-conven-training (us-west-2)` and Dynamo DB `table=return_prediction`
