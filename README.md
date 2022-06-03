@@ -45,7 +45,7 @@ This diagram describes the workflow of this project. Various large-scale computi
 
 ### 2. Paralleled Economic Spillovers Computation with R
 > Do VAR lag fitting, calculate spillovers, and output network graph.
-> After the implementation of Rmpi(parallel processing locally with work distributed to 3 cores, the running time is down to 2 mins, in comparison to ten minutes when serial processing. 
+> After the implementation of Rmpi(parallel processing locally with work distributed to 3 cores, the running time is down to 20 minutes, in comparison to 40 minutes when serial processing. 
 
 **Codes availabe at:** <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/R%20Scripts/parallel.R"> parallel.R</a>
 
@@ -124,6 +124,9 @@ This visualization presents the comparison results of the two deep learning pipe
 The exponential growth of Bitcoin and altcoins and the dramatic fluctuation of their prices are increasingly raising researchers’ concerns in recent years. Whether cryptocurrencies still maintain their safe-haven property? Will the crash of the cryptocurrency market be able to impulse strong impacts on the other financial markets? How to prevent the spillovers from high-risk crypto assets to the other assets? All these questions remain to be studied. To provide part of the answer, this research, combining both a traditional econometric analysis framework and a deep learning-based analysis framework together, investigated the spillovers between cryptocurrencies and conventional currencies in-depth. We found that the additional conventional currencies price prediction power injected by the historical market information of cryptocurrencies is growing these years which implies the growing spillovers from the crypto coin market to the conventional currency market. Although the growing trend only exists in one direction, the dynamic implies that crypto coins might be gradually losing their safe-haven capability today.
 
 ![plot](https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Images/lm_results.svg)
+
+### 8. Limitations
+The first limitation of this study is that we were unable to find an approach to run our R code on AWS or midway parallelly, which restricts our scalability from the hardware end. If we were able to use more cores than 3, we believe that the process of calculating spillovers and generating graphs will be even faster than 20 minutes. In addition, the time it takes for writing data frames into S3 bucket by Pyspark parquet is a bit long (~60mins). In the future, we might need to find new approaches to speed up this process. Also, our study is limited by the available resources from AWS EC2 instances. This limited availability inevitably leads to the failing of our parallelization on AWS with the 4-hour limit running time. Finally, we were not able to finish a more complete visualization of our findings due to the time limit.
 
 ## Contributions
 Data gathering and preprocessing – Shiyang Lai & Peihan Gao
