@@ -27,10 +27,10 @@ This diagram describes the workflow of this project. Various large-scale computi
   3. Unify the unit (unify the format of currency symbols and corresponding exchanges)      
   4. Calculate the returns, volatility, exchange rate of currencies   
   5. Generate a dictonary of pyspark dataframe            
-  --      time elapsed     --   
-    - parallel version 2 mins             
+  --      time elapsed     --               
+    - parallel version 2 mins                       
     - serial version 10 mins               
-  6. Write each dataframe in the dictionary as parquet into S3 bucket. (~ 15mins)         
+  6. Write each dataframe in the dictionary as parquet into S3 bucket. (15 parquets ~ 90mins)         
      
 > The parallelization is conducted with pyspark on EMR notebook.                  
                              
@@ -61,6 +61,13 @@ Rmpi installation for Windows: http://fisher.stats.uwo.ca/faculty/yu/Rmpi/window
 Rmpi installation for Linux: http://fisher.stats.uwo.ca/faculty/yu/Rmpi/install.htm
 
 ### 3. Data Storage with S3 and Dynamo DB
+> Raw currency data files are saved in S3 bucket `crpytoconven (us-east-1)`
+Image below is the snapshot of the raw data, processed data and the module script in the S3 Bucket. To benefit cross-platform communication, we uploaded all the script module and data into the bucket.            
+![image](/Snapshots/AWS_S3_RAW.png)            
+![image](/Snapshots/AWS_S3_dataprocess_module.png)             
+![image](/Snapshots/AWS_S3_processed.png)               
+                                  
+                   
 > Output files in the previous two steps were uploaded to S3 bucket `crypto-conven-training (us-west-2)` and Dynamo DB `table=return_prediction`
 
 **Codes available at:** <a href="https://github.com/lsc4ss-s22/final-project-crypto/blob/main/Notebooks/to_dynamodb.ipynb"> to_dynamodb.ipynb</a>
