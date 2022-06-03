@@ -174,8 +174,7 @@ class DataPipline():
                 for how in hows:  
                     df_dct[calculate+how] = df_dct[types[0]+calculate+how].join(df_dct[types[1]+calculate+how],on='Date', how="inner")
             else:
-                df_dct[calculate] = df_dct[types[0]+calculate].join(df_dct[types[1]+calculate],on='Date', how="inner")
-                
+                df_dct[calculate] = df_dct[types[0]+calculate].join(df_dct[types[1]+calculate],on='Date', how="inner")      
 
         for key, df in df_dct.items():
             df.write.parquet('s3://crpytoconven/project/data/preprocessed/'+key+'.parquet',mode="overwrite")
